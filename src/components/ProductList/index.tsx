@@ -15,7 +15,7 @@ export const ProductList = ({ title, background }: ProductListProps) => (
           gameName="GameName1"
           category="Ação"
           description="teste"
-          image="//placeholder.it/222x250"
+          image="https://fakeimg.pl/222x250"
           infos={['-10%', 'R$ 150,00']}
           system="Windows"
         />
@@ -23,7 +23,7 @@ export const ProductList = ({ title, background }: ProductListProps) => (
           gameName="GameName2"
           category="Ação"
           description="teste2"
-          image="//placeholder.it/222x250"
+          image="https://fakeimg.pl/222x250"
           infos={['-10%', 'R$ 150,00']}
           system="Windows"
         />
@@ -31,7 +31,7 @@ export const ProductList = ({ title, background }: ProductListProps) => (
           gameName="GameName3"
           category="Ação"
           description="teste3"
-          image="//placeholder.it/222x250"
+          image="https://fakeimg.pl/222x250"
           infos={['-10%', 'R$ 150,00']}
           system="Windows"
         />
@@ -39,7 +39,7 @@ export const ProductList = ({ title, background }: ProductListProps) => (
           gameName="GameName4"
           category="Ação"
           description="teste4"
-          image="//placeholder.it/222x250"
+          image="https://fakeimg.pl/222x250"
           infos={['-10%', 'R$ 150,00']}
           system="Windows"
         />

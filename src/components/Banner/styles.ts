@@ -25,7 +25,7 @@ export const Imagem = styled.div`
 
 export const Titulo = styled.h2`
   font-size: 36px;
-  font-weight: 700;
+  font-weight: bold;
   max-width: 449px;
 `
 
