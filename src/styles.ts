@@ -22,10 +22,11 @@ export const GlobalCss = createGlobalStyle`
     padding-top: 40px;
     margin-bottom: 80px;
   }
-`
 
-export const Container = styled.div`
-  max-width: 1024px;
-  width: 100%;
-  margin: 0 auto;
+  // Container como classe para que possa ser usado dentro da imagem do banner
+  .container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+  }
 `
