@@ -4,6 +4,7 @@ import PageRoutes from './routes'
 
 import { Header } from './components/Header'
 import { GlobalCss } from './styles'
+import { Footer } from './components/Footer'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header />
       </div>
       <PageRoutes />
+      <Footer />
     </BrowserRouter>
   )
 }
