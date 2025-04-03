@@ -8,7 +8,9 @@ import { Card } from '../Product/style'
  * ? O tipo "Omit" serve para omitir a passagem de alguma das propriedades
  * * <Omit<Argumento, Propriedade_omitida>>
  */
-export const ProductContainer = styled.section<Omit<ProductListProps, 'title'>>`
+export const ProductContainer = styled.section<
+  Omit<ProductListProps, 'title' | 'gameList'>
+>`
   padding: 32px 0;
 
   background-color: ${(ProductListProps) =>
