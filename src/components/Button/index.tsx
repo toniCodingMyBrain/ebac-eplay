@@ -1,17 +1,30 @@
 import { ButtonContainer, ButtonLink } from './style'
 
-type ButtonProps = {
+export type ButtonProps = {
   type: 'button' | 'link'
   title: string
   to?: string
   onClick?: () => void
   children: string
+  variant?: 'primary' | 'secondary'
 }
 
-export const Button = ({ type, title, to, onClick, children }: ButtonProps) => {
+export const Button = ({
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  variant
+}: ButtonProps) => {
   if (type === 'button') {
     return (
-      <ButtonContainer type="button" title={title} onClick={onClick}>
+      <ButtonContainer
+        type="button"
+        title={title}
+        variant={variant}
+        onClick={onClick}
+      >
         {children}
       </ButtonContainer>
     )
