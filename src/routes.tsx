@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 
 import { Home } from './pages/Home'
-import { Categories } from './pages/categories'
+import { Categories } from './pages/Categories'
+import { Product } from './pages/Product'
 
 /**
  * * Criando as rotas que atuarão no RouterProvider
@@ -18,11 +19,14 @@ const InternRoutes = createBrowserRouter([
 ])
 */
 
-// Criando as rotas externas ao RouterProvider com o browserRouter
+// ? Criando as rotas externas ao RouterProvider com o browserRouter
+// * Na rota de produto, tem um path parameter de id,
+// * que vai redirecionar para o produto com aquele id.
 const PageRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/categories" element={<Categories />} />
+    <Route path="/product/:id" element={<Product />} />
   </Routes>
 )
 
