@@ -6,11 +6,12 @@ export type SectionProps = {
   children: React.ReactNode
 }
 
-export const Section = ({ title, background }: SectionProps) => {
+export const Section = ({ title, background, children }: SectionProps) => {
   return (
     <SectionContainer background={background}>
       <div className="container">
         <SectionTitle>{title}</SectionTitle>
+        {children}
       </div>
     </SectionContainer>
   )

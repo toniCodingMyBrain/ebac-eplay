@@ -1,6 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { Hero } from '../../components/Hero'
 import { Section } from '../../components/Section'
+import { Gallery } from '../../components/Gallery'
+import zelda from '../../assets/images/zelda.png'
+
+import residentEvil from '../../assets/images/resident.png'
 
 export const Product = () => {
   /*
@@ -8,6 +12,8 @@ export const Product = () => {
    * const teste = useParams()
    * console.log(teste)
    */
+
+  const { id } = useParams()
 
   return (
     <>
@@ -41,9 +47,7 @@ export const Product = () => {
           configurações do jogo.
         </p>
       </Section>
-      <Section title="Galeria de fotos" background="black">
-        <div>Fotos</div>
-      </Section>
+      <Gallery name="Teste" defaultCover={residentEvil} />
     </>
   )
 }

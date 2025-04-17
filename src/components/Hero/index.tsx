@@ -1,6 +1,6 @@
 import { ProductBanner, Infos } from './styles'
 
-import bannerProductImg from '../../assets/images_routes/fundo_hogwarts.png'
+import bannerProductImg from '../../assets/images/fundo_hogwarts.png'
 import { Tag } from '../Tag'
 import { Button } from '../Button'
 
