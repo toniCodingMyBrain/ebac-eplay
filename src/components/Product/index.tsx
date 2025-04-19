@@ -17,17 +17,27 @@ export const Product = ({
   description,
   infos,
   image
-}: ProductProps) => (
-  <Card>
-    <img src={image} alt={gameName} />
-    <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
-    </Infos>
-    <Title>{gameName}</Title>
-    <Tag>{category}</Tag>
-    <Tag>{system}</Tag>
-    <Description>{description}</Description>
-  </Card>
-)
+}: ProductProps) => {
+  // Função de corte de descrição
+  const getDescription = (desc: string) => {
+    if (desc.length > 95) {
+      return desc.slice(0, 92).concat('...')
+    }
+    return desc
+  }
+
+  return (
+    <Card>
+      <img src={image} alt={gameName} />
+      <Infos>
+        {infos.map((info) => (
+          <Tag key={info}>{info}</Tag>
+        ))}
+      </Infos>
+      <Title>{gameName}</Title>
+      <Tag>{category}</Tag>
+      <Tag>{system}</Tag>
+      <Description>{getDescription(description)}</Description>
+    </Card>
+  )
+}

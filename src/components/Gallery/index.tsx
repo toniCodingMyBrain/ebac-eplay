@@ -1,3 +1,7 @@
+import { useState } from 'react'
+
+import { GalleryItem } from '../../pages/Home'
+
 import { Section } from '../Section'
 import { ItemsList, Item, Action, Modal, ModalContent } from './styles'
 
@@ -7,16 +11,10 @@ import hogwarts_zoom from '../../assets/images/hogwarts_zoom.png'
 import close from '../../assets/icons/close.png'
 import playIcon from '../../assets/icons/play.png'
 import zoomIcon from '../../assets/icons/zoom.png'
-import { useState } from 'react'
 
 type GalleryProps = {
   defaultCover: string
   name: string
-}
-
-interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
 }
 
 interface ModalState extends GalleryItem {
