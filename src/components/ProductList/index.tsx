@@ -6,6 +6,7 @@ export type ProductListProps = {
   title: string
   background: 'gray' | 'black'
   gameList: Game[]
+  id?: string
 }
 
 export const priceFormat = (price = 0) => {
@@ -18,7 +19,8 @@ export const priceFormat = (price = 0) => {
 export const ProductList = ({
   title,
   background,
-  gameList
+  gameList,
+  id
 }: ProductListProps) => {
   const getNameTags = (game: Game) => {
     const tags = []
@@ -40,13 +42,14 @@ export const ProductList = ({
   }
 
   return (
-    <ProductContainer background={background}>
+    <ProductContainer id={id} background={background}>
       <div className="container">
         <TitleSection>{title}</TitleSection>
         <List>
           {gameList.map((game) => (
             <Product
               key={game.id}
+              id={game.id}
               gameName={game.name}
               category={game.details.category}
               description={game.description}

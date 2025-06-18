@@ -8,6 +8,7 @@ type ProductProps = {
   description: string
   infos: string[]
   image: string
+  id: number
 }
 
 export const Product = ({
@@ -16,7 +17,8 @@ export const Product = ({
   system,
   description,
   infos,
-  image
+  image,
+  id
 }: ProductProps) => {
   // Função de corte de descrição
   const getDescription = (desc: string) => {
@@ -27,7 +29,7 @@ export const Product = ({
   }
 
   return (
-    <Card>
+    <Card to={`/product/${id}`}>
       <img src={image} alt={gameName} />
       <Infos>
         {infos.map((info) => (
@@ -37,7 +39,7 @@ export const Product = ({
       <Title>{gameName}</Title>
       <Tag>{category}</Tag>
       <Tag>{system}</Tag>
-      <Description>{getDescription(description)}</Description>
+      <Description>{description}</Description>
     </Card>
   )
 }

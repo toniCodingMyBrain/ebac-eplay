@@ -12,13 +12,14 @@ import close from '../../assets/icons/close.png'
 import playIcon from '../../assets/icons/play.png'
 import zoomIcon from '../../assets/icons/zoom.png'
 
+interface ModalState extends GalleryItem {
+  isVisible: boolean
+}
+
 type GalleryProps = {
   defaultCover: string
   name: string
-}
-
-interface ModalState extends GalleryItem {
-  isVisible: boolean
+  items: GalleryItem[]
 }
 
 const mock: GalleryItem[] = [
@@ -36,15 +37,7 @@ const mock: GalleryItem[] = [
   }
 ]
 
-export const Gallery = ({ defaultCover, name }: GalleryProps) => {
-  const closeModal = () => {
-    setModal({
-      isVisible: false,
-      type: 'image',
-      url: ''
-    })
-  }
-
+export const Gallery = ({ defaultCover, name, items }: GalleryProps) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
     type: 'image',
@@ -61,13 +54,21 @@ export const Gallery = ({ defaultCover, name }: GalleryProps) => {
     return playIcon
   }
 
+  const closeModal = () => {
+    setModal({
+      isVisible: false,
+      type: 'image',
+      url: ''
+    })
+  }
+
   return (
     <>
-      <Section title="Galeria de Fotos" background="black">
+      <Section title="Galeria" background="black">
         <ItemsList>
-          {mock.map((media, index) => (
+          {items.map((media, index) => (
             <Item
-              key={index + 1}
+              key={media.url}
               onClick={() => {
                 setModal({
                   isVisible: true,
@@ -94,7 +95,7 @@ export const Gallery = ({ defaultCover, name }: GalleryProps) => {
             <img src={close} alt="Fechar" onClick={() => closeModal()} />
           </header>
           {modal.type === 'image' ? (
-            <img src={modal.url} alt="Hogwarts Legacy" />
+            <img src={modal.url} />
           ) : (
             <iframe frameBorder={0} src={modal.url} />
           )}

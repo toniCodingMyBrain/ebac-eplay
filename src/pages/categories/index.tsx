@@ -2,9 +2,22 @@ import { useEffect, useState } from 'react'
 import { ProductList } from '../../components/ProductList'
 
 import { Game } from '../Home'
+import {
+  useGetActionGamesQuery,
+  useGetFightGamesQuery,
+  useGetRPGGamesQuery,
+  useGetSimulationGamesQuery,
+  useGetSportsGamesQuery
+} from '../../services/api'
 
 export const Categories = () => {
-  const [gamesAction, setGamesAction] = useState<Game[]>([])
+  const { data: actionGames } = useGetActionGamesQuery()
+  const { data: sportsGames } = useGetSportsGamesQuery()
+  const { data: simulationGames } = useGetSimulationGamesQuery()
+  const { data: fightGames } = useGetFightGamesQuery()
+  const { data: rpgGames } = useGetRPGGamesQuery()
+
+  /* const [gamesAction, setGamesAction] = useState<Game[]>([])
   const [gamesSports, setGamesSports] = useState<Game[]>([])
   const [gamesSimulation, setGamesSimulation] = useState<Game[]>([])
   const [gamesRpg, setGamesRpg] = useState<Game[]>([])
@@ -30,19 +43,27 @@ export const Categories = () => {
     fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
       .then((res) => res.json())
       .then((res) => setGamesFight(res))
-  }, [])
+  }, []) */
 
-  return (
-    <>
-      <ProductList gameList={gamesAction} title="Ação" background="gray" />
-      <ProductList gameList={gamesSports} title="Esportes" background="black" />
-      <ProductList
-        gameList={gamesSimulation}
-        title="Simulação"
-        background="gray"
-      />
-      <ProductList gameList={gamesRpg} title="RPG" background="black" />
-      <ProductList gameList={gamesFight} title="Luta" background="gray" />
-    </>
-  )
+  if (actionGames && sportsGames && simulationGames && fightGames && rpgGames) {
+    return (
+      <>
+        <ProductList gameList={actionGames} title="Ação" background="gray" />
+        <ProductList
+          gameList={sportsGames}
+          title="Esportes"
+          background="black"
+        />
+        <ProductList
+          gameList={simulationGames}
+          title="Simulação"
+          background="gray"
+        />
+        <ProductList gameList={rpgGames} title="RPG" background="black" />
+        <ProductList gameList={fightGames} title="Luta" background="gray" />
+      </>
+    )
+  }
+
+  return <h4>Carregando...</h4>
 }

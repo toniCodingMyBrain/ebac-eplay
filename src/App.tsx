@@ -5,17 +5,23 @@ import PageRoutes from './routes'
 import { Header } from './components/Header'
 import { GlobalCss } from './styles'
 import { Footer } from './components/Footer'
+import { Provider } from 'react-redux'
+import { store } from './store'
+import Cart from './components/Cart'
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalCss />
-      <div className="container">
-        <Header />
-      </div>
-      <PageRoutes />
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalCss />
+        <div className="container">
+          <Header />
+        </div>
+        <PageRoutes />
+        <Footer />
+        <Cart />
+      </BrowserRouter>
+    </Provider>
   )
 }
 
