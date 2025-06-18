@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { ProductListProps } from '.'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { Card } from '../Product/style'
 
 /**
@@ -27,6 +27,14 @@ export const List = styled.ul`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
   margin-top: 40px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const TitleSection = styled.h2`

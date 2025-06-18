@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const HeaderBar = styled.header`
   background-color: ${cores.gray};
@@ -24,6 +24,10 @@ export const HeaderBar = styled.header`
     &:hover {
       color: ${cores.green};
     }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: none;
   }
 `
 

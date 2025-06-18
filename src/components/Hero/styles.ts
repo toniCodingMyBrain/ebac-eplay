@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { TagContainer } from '../Tag/style'
 
 export const ProductBanner = styled.div`
@@ -36,6 +36,10 @@ export const ProductBanner = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    background-size: cover;
   }
 `
 
