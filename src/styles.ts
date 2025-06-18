@@ -10,7 +10,7 @@ export const cores = {
 
 export const breakpoints = {
   desktop: '1024px',
-  tablet: '768pc'
+  tablet: '768px'
 }
 
 export const GlobalCss = createGlobalStyle`

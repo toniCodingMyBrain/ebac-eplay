@@ -20,7 +20,6 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
-    console.log(isOpen)
   }
 
   const getTotalPrice = () => {
