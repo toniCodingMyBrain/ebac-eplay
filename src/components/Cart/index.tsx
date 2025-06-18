@@ -8,7 +8,6 @@ import {
   Sidebar
 } from './styles'
 
-import starWars from '../../assets/images/star_wars.png'
 import { Tag } from '../Tag'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'

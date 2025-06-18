@@ -5,9 +5,6 @@ import { GalleryItem } from '../../pages/Home'
 import { Section } from '../Section'
 import { ItemsList, Item, Action, Modal, ModalContent } from './styles'
 
-import zelda from '../../assets/images/zelda.png'
-import hogwarts_zoom from '../../assets/images/hogwarts_zoom.png'
-
 import close from '../../assets/icons/close.png'
 import playIcon from '../../assets/icons/play.png'
 import zoomIcon from '../../assets/icons/zoom.png'
@@ -21,21 +18,6 @@ type GalleryProps = {
   name: string
   items: GalleryItem[]
 }
-
-const mock: GalleryItem[] = [
-  {
-    type: 'image',
-    url: hogwarts_zoom
-  },
-  {
-    type: 'image',
-    url: hogwarts_zoom
-  },
-  {
-    type: 'video',
-    url: hogwarts_zoom
-  }
-]
 
 export const Gallery = ({ defaultCover, name, items }: GalleryProps) => {
   const [modal, setModal] = useState<ModalState>({

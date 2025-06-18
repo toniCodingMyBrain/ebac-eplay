@@ -4,12 +4,10 @@ import { priceFormat } from '../ProductList'
 
 import { Tag } from '../Tag'
 import { Button } from '../Button'
-import { useEffect, useState } from 'react'
-import { Game } from '../../pages/Home'
 import { useGetFeaturedGamesQuery } from '../../services/api'
 
 export const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGamesQuery()
+  const { data: game } = useGetFeaturedGamesQuery()
 
   /* const [game, setGame] = useState<Game>()
 
@@ -20,7 +18,7 @@ export const Banner = () => {
   }, []) */
 
   if (!game) {
-    return <strong>loading...</strong>
+    return <strong>Carregando...</strong>
   }
 
   return (
