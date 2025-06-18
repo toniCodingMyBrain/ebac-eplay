@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
+import { Link } from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
   background-color: ${cores.gray};
@@ -17,7 +18,7 @@ export const FooterLinks = styled.ul`
   display: flex;
   margin-top: 16px;
 `
-export const FooterLink = styled.a`
+export const FooterLink = styled(Link)`
   color: ${cores.lightGray};
   text-decoration: none;
   margin-right: 8px;

@@ -48,19 +48,36 @@ export const Categories = () => {
   if (actionGames && sportsGames && simulationGames && fightGames && rpgGames) {
     return (
       <>
-        <ProductList gameList={actionGames} title="Ação" background="gray" />
+        <ProductList
+          gameList={actionGames}
+          id="action"
+          title="Ação"
+          background="gray"
+        />
         <ProductList
           gameList={sportsGames}
+          id="sports"
           title="Esportes"
           background="black"
         />
         <ProductList
           gameList={simulationGames}
+          id="simulation"
           title="Simulação"
           background="gray"
         />
-        <ProductList gameList={rpgGames} title="RPG" background="black" />
-        <ProductList gameList={fightGames} title="Luta" background="gray" />
+        <ProductList
+          gameList={rpgGames}
+          id="rpg"
+          title="RPG"
+          background="black"
+        />
+        <ProductList
+          gameList={fightGames}
+          id="fight"
+          title="Luta"
+          background="gray"
+        />
       </>
     )
   }

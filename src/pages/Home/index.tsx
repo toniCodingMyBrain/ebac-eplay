@@ -56,10 +56,16 @@ export const Home = () => {
         <Banner />
         <ProductList
           gameList={onSaleGames}
+          id="on-sale"
           title="Promoções"
           background="gray"
         />
-        <ProductList gameList={soonGames} title="Em Breve" background="black" />
+        <ProductList
+          gameList={soonGames}
+          id="coming-soon"
+          title="Em Breve"
+          background="black"
+        />
       </>
     )
   }
