@@ -30,7 +30,7 @@ export const Button = ({
     )
   }
   return (
-    // adicionado Casting porque o link não suporta tipos indefinidos
+    //? adicionado Casting porque o link não suporta tipos indefinidos
     <ButtonLink to={to as string} title={title}>
       {children}
     </ButtonLink>
