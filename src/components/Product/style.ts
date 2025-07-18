@@ -11,6 +11,7 @@ export const Card = styled(Link)`
   text-decoration: none;
   color: ${cores.white};
   display: block;
+  height: 100%;
 
   img {
     display: block;
@@ -39,9 +40,9 @@ export const Description = styled.p`
   display: block;
   margin-top: 16px;
   flex: 1;
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 4; */
   overflow: hidden;
   text-overflow: ellipsis;
 `

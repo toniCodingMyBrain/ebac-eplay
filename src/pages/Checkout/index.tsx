@@ -7,9 +7,11 @@ import boleto from '../../assets/icons/boleto.png'
 import cartao from '../../assets/icons/cartao.png'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
+  const [purchase, { data, isSuccess }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -107,7 +109,34 @@ const Checkout = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log('Form submitted with values:', values)
+      purchase({
+        billing: {
+          document: values.cpf,
+          email: values.email,
+          name: values.fullName
+        },
+        delivery: {
+          email: values.deliveryEmail
+        },
+        payment: {
+          installments: 1,
+          card: {
+            active: payWithCard,
+            code: Number(values.cardCode),
+            name: values.cardDisplayName,
+            number: values.cardNumber,
+            owner: {
+              document: values.cpfCardOwner,
+              name: values.cardOwner
+            },
+            expires: {
+              month: 1,
+              year: 2023
+            }
+          }
+        },
+        products: [{ id: 1, price: 10 }]
+      })
     }
   })
 
@@ -118,256 +147,304 @@ const Checkout = () => {
   }
 
   return (
-    <>
-      <form onSubmit={form.handleSubmit} className="container">
-        <Card title="Dados de cobrança">
+    <div className="container">
+      {isSuccess ? (
+        <Card title="Muito obrigado">
           <>
-            <Row>
-              <InputGroup>
-                <label htmlFor="fullName">Nome completo</label>
-                <input
-                  id="fullName"
-                  type="text"
-                  value={form.values.fullName}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>
-                  {getErrorMessage('fullName', form.errors.fullName)}
-                </small>
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="email">E-mail</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={form.values.email}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('email', form.errors.email)}</small>
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="cpf">CPF</label>
-                <input
-                  id="cpf"
-                  type="text"
-                  value={form.values.cpf}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
-              </InputGroup>
-            </Row>
-            <h3 className="margin-top">Dados de entrega - conteúdo digital</h3>
-            <Row>
-              <InputGroup>
-                <label htmlFor="deliveryEmail">Email</label>
-                <input
-                  id="deliveryEmail"
-                  type="email"
-                  value={form.values.deliveryEmail}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>
-                  {getErrorMessage('deliveryEmail', form.errors.deliveryEmail)}
-                </small>
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="confirmDeliveryEmail">Confirme o e-mail</label>
-                <input
-                  id="confirmDeliveryEmail"
-                  type="email"
-                  value={form.values.confirmDeliveryEmail}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>
-                  {getErrorMessage(
-                    'confirmDeliveryEmail',
-                    form.errors.confirmDeliveryEmail
-                  )}
-                </small>
-              </InputGroup>
-            </Row>
+            <p>
+              É com satisfação que informamos que recebemos seu pedido com
+              sucesso! <br />
+              Abaixo estão os detalhes da sua compra: <br />
+              Número do pedido: {data.orderId} <br />
+              Forma de pagamento:{' '}
+              {payWithCard ? 'Cartão de Crédito' : 'Boleto Bancário'}
+            </p>
+            <p className="margin-top">
+              Caso tenha optado pelo pagamento via boleto bancário, lembre-se de
+              que a confirmação pode levar até 3 dias úteis. Após a aprovação do
+              pagamento, enviaremos um e-mail contendo o código de ativação do
+              jogo.
+            </p>
+            <p className="margin-top">
+              Se você optou pelo pagamento com cartão de crédito, a liberação do
+              código de ativação ocorrerá após a aprovação da transação pela
+              operadora do cartão. Você receberá o código no e-mail cadastrado
+              em nossa loja.
+            </p>
+            <p className="margin-top">
+              Pedimos que verifique sua caixa de entrada e a pasta de spam para
+              garantir que receba nossa comunicação. Caso tenha alguma dúvida ou
+              necessite de mais informações, por favor, entre em contato conosco
+              através dos nossos canais de atendimento ao cliente
+            </p>
+            <p className="margin-top">
+              Agradecemos por escolher a EPLAY e esperamos que desfrute do seu
+              jogo!
+            </p>
           </>
         </Card>
-        <Card title="Pagamento">
-          <>
-            <TabButton
-              isActive={!payWithCard}
-              onClick={() => setPayWithCard(false)}
-            >
-              <img src={boleto} alt="Boleto" />
-              Boleto bancário
-            </TabButton>
-            <TabButton
-              isActive={payWithCard}
-              onClick={() => setPayWithCard(true)}
-            >
-              <img src={cartao} alt="Cartão" />
-              Cartão de crédito
-            </TabButton>
-            <div className="margin-top">
-              {payWithCard ? (
-                <>
-                  <Row>
-                    <InputGroup>
-                      <label htmlFor="cardOwner">
-                        Nome do titular do cartão
-                      </label>
-                      <input
-                        id="cardOwner"
-                        type="text"
-                        value={form.values.cardOwner}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage('cardOwner', form.errors.cardOwner)}
-                      </small>
-                    </InputGroup>
-                    <InputGroup>
-                      <label htmlFor="cpfCardOwner">
-                        CPF do titular do cartão
-                      </label>
-                      <input
-                        id="cpfCardOwner"
-                        type="text"
-                        value={form.values.cpfCardOwner}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage(
-                          'cpfCardOwner',
-                          form.errors.cpfCardOwner
-                        )}
-                      </small>
-                    </InputGroup>
-                  </Row>
-                  <Row marginTop="24px">
-                    <InputGroup>
-                      <label htmlFor="cardDisplayName">Nome no cartão</label>
-                      <input
-                        id="cardDisplayName"
-                        type="text"
-                        value={form.values.cardDisplayName}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage(
-                          'cardDisplayName',
-                          form.errors.cardDisplayName
-                        )}
-                      </small>
-                    </InputGroup>
-                    <InputGroup>
-                      <label htmlFor="cardNumber">Numero do cartão</label>
-                      <input
-                        id="cardNumber"
-                        type="text"
-                        value={form.values.cardNumber}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                      </small>
-                    </InputGroup>
-                    <InputGroup maxWidth="123px">
-                      <label htmlFor="expiresMonth">Mês do vencimento</label>
-                      <input
-                        id="expiresMonth"
-                        type="text"
-                        value={form.values.expiresMonth}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage(
-                          'expiresMonth',
-                          form.errors.expiresMonth
-                        )}
-                      </small>
-                    </InputGroup>
-                    <InputGroup maxWidth="123px">
-                      <label htmlFor="expiresYear">Ano do vencimento</label>
-                      <input
-                        id="expiresYear"
-                        type="text"
-                        value={form.values.expiresYear}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage(
-                          'expiresYear',
-                          form.errors.expiresYear
-                        )}
-                      </small>
-                    </InputGroup>
-                    <InputGroup maxWidth="48px">
-                      <label htmlFor="cardCode">CVV</label>
-                      <input
-                        id="cardCode"
-                        type="text"
-                        value={form.values.cardCode}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      />
-                      <small>
-                        {getErrorMessage('cardCode', form.errors.cardCode)}
-                      </small>
-                    </InputGroup>
-                  </Row>
-                  <Row marginTop="24px">
-                    <InputGroup maxWidth="136px">
-                      <label htmlFor="installments">Parcelamento</label>
-                      <select
-                        name=""
-                        id="installments"
-                        value={form.values.installments}
-                        onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                      >
+      ) : (
+        <form onSubmit={form.handleSubmit}>
+          <Card title="Dados de cobrança">
+            <>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="fullName">Nome completo</label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    value={form.values.fullName}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage('fullName', form.errors.fullName)}
+                  </small>
+                </InputGroup>
+                <InputGroup>
+                  <label htmlFor="email">E-mail</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={form.values.email}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>{getErrorMessage('email', form.errors.email)}</small>
+                </InputGroup>
+                <InputGroup>
+                  <label htmlFor="cpf">CPF</label>
+                  <input
+                    id="cpf"
+                    type="text"
+                    value={form.values.cpf}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
+                </InputGroup>
+              </Row>
+              <h3 className="margin-top">
+                Dados de entrega - conteúdo digital
+              </h3>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="deliveryEmail">Email</label>
+                  <input
+                    id="deliveryEmail"
+                    type="email"
+                    value={form.values.deliveryEmail}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage(
+                      'deliveryEmail',
+                      form.errors.deliveryEmail
+                    )}
+                  </small>
+                </InputGroup>
+                <InputGroup>
+                  <label htmlFor="confirmDeliveryEmail">
+                    Confirme o e-mail
+                  </label>
+                  <input
+                    id="confirmDeliveryEmail"
+                    type="email"
+                    value={form.values.confirmDeliveryEmail}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage(
+                      'confirmDeliveryEmail',
+                      form.errors.confirmDeliveryEmail
+                    )}
+                  </small>
+                </InputGroup>
+              </Row>
+            </>
+          </Card>
+          <Card title="Pagamento">
+            <>
+              <TabButton
+                isActive={!payWithCard}
+                onClick={() => setPayWithCard(false)}
+              >
+                <img src={boleto} alt="Boleto" />
+                Boleto bancário
+              </TabButton>
+              <TabButton
+                isActive={payWithCard}
+                onClick={() => setPayWithCard(true)}
+              >
+                <img src={cartao} alt="Cartão" />
+                Cartão de crédito
+              </TabButton>
+              <div className="margin-top">
+                {payWithCard ? (
+                  <>
+                    <Row>
+                      <InputGroup>
+                        <label htmlFor="cardOwner">
+                          Nome do titular do cartão
+                        </label>
+                        <input
+                          id="cardOwner"
+                          type="text"
+                          value={form.values.cardOwner}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage('cardOwner', form.errors.cardOwner)}
+                        </small>
+                      </InputGroup>
+                      <InputGroup>
+                        <label htmlFor="cpfCardOwner">
+                          CPF do titular do cartão
+                        </label>
+                        <input
+                          id="cpfCardOwner"
+                          type="text"
+                          value={form.values.cpfCardOwner}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
                         <small>
                           {getErrorMessage(
-                            'installments',
-                            form.errors.installments
+                            'cpfCardOwner',
+                            form.errors.cpfCardOwner
                           )}
                         </small>
-                        <option value="">1x de R$ 200,00</option>
-                        <option value="">2x de R$ 200,00</option>
-                        <option value="">3x de R$ 200,00</option>
-                        <option value="">4x de R$ 200,00</option>
-                      </select>
-                    </InputGroup>
-                  </Row>
-                </>
-              ) : (
-                <p>
-                  Ao optar por essa forma de pagamento, é importante lembrar que
-                  a confirmação pode levar até 3 dias úteis, devido aos prazos
-                  estabelecidos pelas instituições financeiras. Portanto, a
-                  liberação do código de ativação do jogo adquirido ocorrerá
-                  somente após a aprovação do pagamento do boleto.
-                </p>
-              )}
-            </div>
-          </>
-        </Card>
-        <Button
-          type="button"
-          variant="primary"
-          title="Clique aqui para finalizar a compra"
-        >
-          Finalizar a compra
-        </Button>
-      </form>
-    </>
+                      </InputGroup>
+                    </Row>
+                    <Row marginTop="24px">
+                      <InputGroup>
+                        <label htmlFor="cardDisplayName">Nome no cartão</label>
+                        <input
+                          id="cardDisplayName"
+                          type="text"
+                          value={form.values.cardDisplayName}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage(
+                            'cardDisplayName',
+                            form.errors.cardDisplayName
+                          )}
+                        </small>
+                      </InputGroup>
+                      <InputGroup>
+                        <label htmlFor="cardNumber">Numero do cartão</label>
+                        <input
+                          id="cardNumber"
+                          type="text"
+                          value={form.values.cardNumber}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage(
+                            'cardNumber',
+                            form.errors.cardNumber
+                          )}
+                        </small>
+                      </InputGroup>
+                      <InputGroup maxWidth="123px">
+                        <label htmlFor="expiresMonth">Mês do vencimento</label>
+                        <input
+                          id="expiresMonth"
+                          type="text"
+                          value={form.values.expiresMonth}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage(
+                            'expiresMonth',
+                            form.errors.expiresMonth
+                          )}
+                        </small>
+                      </InputGroup>
+                      <InputGroup maxWidth="123px">
+                        <label htmlFor="expiresYear">Ano do vencimento</label>
+                        <input
+                          id="expiresYear"
+                          type="text"
+                          value={form.values.expiresYear}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage(
+                            'expiresYear',
+                            form.errors.expiresYear
+                          )}
+                        </small>
+                      </InputGroup>
+                      <InputGroup maxWidth="48px">
+                        <label htmlFor="cardCode">CVV</label>
+                        <input
+                          id="cardCode"
+                          type="text"
+                          value={form.values.cardCode}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        />
+                        <small>
+                          {getErrorMessage('cardCode', form.errors.cardCode)}
+                        </small>
+                      </InputGroup>
+                    </Row>
+                    <Row marginTop="24px">
+                      <InputGroup maxWidth="136px">
+                        <label htmlFor="installments">Parcelamento</label>
+                        <select
+                          name=""
+                          id="installments"
+                          value={form.values.installments}
+                          onChange={form.handleChange}
+                          onBlur={form.handleBlur}
+                        >
+                          <small>
+                            {getErrorMessage(
+                              'installments',
+                              form.errors.installments
+                            )}
+                          </small>
+                          <option value="">1x de R$ 200,00</option>
+                          <option value="">2x de R$ 200,00</option>
+                          <option value="">3x de R$ 200,00</option>
+                          <option value="">4x de R$ 200,00</option>
+                        </select>
+                      </InputGroup>
+                    </Row>
+                  </>
+                ) : (
+                  <p>
+                    Ao optar por essa forma de pagamento, é importante lembrar
+                    que a confirmação pode levar até 3 dias úteis, devido aos
+                    prazos estabelecidos pelas instituições financeiras.
+                    Portanto, a liberação do código de ativação do jogo
+                    adquirido ocorrerá somente após a aprovação do pagamento do
+                    boleto.
+                  </p>
+                )}
+              </div>
+            </>
+          </Card>
+          <Button
+            type="button"
+            variant="primary"
+            title="Clique aqui para finalizar a compra"
+          >
+            Finalizar a compra
+          </Button>
+        </form>
+      )}
+    </div>
   )
 }
 

@@ -20,19 +20,18 @@ export const Product = ({
   image,
   id
 }: ProductProps) => {
-  /**
-   * Função de corte de descrição
-   *
-   * const getDescription = (desc: string) => {
-   *  if (desc.length > 95) {
-   *    return desc.slice(0, 92).concat('...')
-   *  }
-   *  return desc
-   * }
-   */
+  const getDescription = (desc: string) => {
+    if (desc.length > 95) {
+      return desc.slice(0, 92).concat('...')
+    }
+    return desc
+  }
 
   return (
-    <Card to={`/product/${id}`}>
+    <Card
+      title={`Clique aqui para ver mais detalhes do jogo ${gameName}.`}
+      to={`/product/${id}`}
+    >
       <img src={image} alt={gameName} />
       <Infos>
         {infos.map((info) => (
@@ -42,7 +41,7 @@ export const Product = ({
       <Title>{gameName}</Title>
       <Tag>{category}</Tag>
       <Tag>{system}</Tag>
-      <Description>{description}</Description>
+      <Description>{getDescription(description)}</Description>
     </Card>
   )
 }
