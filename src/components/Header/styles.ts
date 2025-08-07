@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Links = styled.ul`
   display: flex;
@@ -12,7 +12,7 @@ export const Links = styled.ul`
 `
 
 export const HeaderBar = styled.header`
-  background-color: ${cores.gray};
+  background-color: ${colors.gray};
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 80px;
@@ -20,12 +20,12 @@ export const HeaderBar = styled.header`
   a,
   span {
     text-decoration: none;
-    color: ${cores.white};
+    color: ${colors.white};
     font-weight: 500;
     transition: all 0.2s;
 
     &:hover {
-      color: ${cores.green};
+      color: ${colors.green};
     }
   }
 `
@@ -97,7 +97,7 @@ export const MenuHamburger = styled.div`
     height: 2px;
     display: block;
     width: 100%;
-    background-color: ${cores.white};
+    background-color: ${colors.white};
     margin-bottom: 4px;
   }
 

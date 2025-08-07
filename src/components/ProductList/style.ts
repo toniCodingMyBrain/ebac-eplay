@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { ProductListProps } from '.'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Card } from '../Product/style'
 
 /**
@@ -14,11 +14,11 @@ export const ProductContainer = styled.section<
   padding: 32px 0;
 
   background-color: ${(ProductListProps) =>
-    ProductListProps.background === 'black' ? cores.black : cores.gray};
+    ProductListProps.background === 'black' ? colors.black : colors.gray};
 
   ${Card} {
     background-color: ${(ProductListProps) =>
-      ProductListProps.background === 'black' ? cores.gray : cores.black};
+      ProductListProps.background === 'black' ? colors.gray : colors.black};
   }
 `
 

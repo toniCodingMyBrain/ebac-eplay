@@ -70,6 +70,7 @@ const api = createApi({
     }),
     purchase: builder.mutation<any, PurchasePayload>({
       query: (body) => ({
+        //? A API retorna um id com o nome orderId
         url: 'checkout',
         method: 'POST',
         body

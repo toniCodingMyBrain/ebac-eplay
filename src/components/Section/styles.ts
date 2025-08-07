@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { SectionProps } from '.'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { Card } from '../Product/style'
 
 /**
@@ -13,11 +13,11 @@ export const SectionContainer = styled.section<
   padding: 32px 0;
 
   background-color: ${(ProductListProps) =>
-    ProductListProps.background === 'black' ? cores.black : cores.gray};
+    ProductListProps.background === 'black' ? colors.black : colors.gray};
 
   ${Card} {
     background-color: ${(ProductListProps) =>
-      ProductListProps.background === 'black' ? cores.gray : cores.black};
+      ProductListProps.background === 'black' ? colors.gray : colors.black};
   }
 
   p {
