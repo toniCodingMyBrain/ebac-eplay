@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Imagem, Titulo, Precos } from './styles'
+import * as S from './styles'
 import { priceFormat } from '../ProductList'
 
 import { Tag } from '../Tag'
@@ -14,15 +14,15 @@ export const Banner = () => {
   }
 
   return (
-    <Imagem style={{ backgroundImage: `url(${game?.media.cover})` }}>
+    <S.Image style={{ backgroundImage: `url(${game?.media.cover})` }}>
       <div className="container">
         <Tag size="big">Destaque do dia</Tag>
         <div>
-          <Titulo>{game?.name}</Titulo>
-          <Precos>
+          <S.Title>{game?.name}</S.Title>
+          <S.Prices>
             De <span>{priceFormat(game?.prices.old)}</span> por apenas{' '}
             {priceFormat(game?.prices.current)}.
-          </Precos>
+          </S.Prices>
         </div>
         <Button
           type="link"
@@ -32,6 +32,6 @@ export const Banner = () => {
           Aproveitar
         </Button>
       </div>
-    </Imagem>
+    </S.Image>
   )
 }

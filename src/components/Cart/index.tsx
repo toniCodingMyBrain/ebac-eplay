@@ -1,12 +1,5 @@
 import { Button } from '../Button'
-import {
-  CartContainer,
-  CartItem,
-  Overlay,
-  Prices,
-  Quantity,
-  Sidebar
-} from './styles'
+import * as S from './styles'
 
 import { Tag } from '../Tag'
 import { useDispatch, useSelector } from 'react-redux'
@@ -33,12 +26,12 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
         <ul>
           {items.map((item) => (
-            <CartItem key={item.id}>
+            <S.CartItem key={item.id}>
               <img src={item.media.thumbnail} alt={item.name} />
               <div>
                 <h3>{item.name}</h3>
@@ -47,23 +40,23 @@ const Cart = () => {
                 <span>{priceFormat(item.prices.current)}</span>
               </div>
               <button type="button" onClick={() => removeItem(item.id)} />
-            </CartItem>
+            </S.CartItem>
           ))}
         </ul>
-        <Quantity>
+        <S.Quantity>
           {items.length +
             `${items.length > 1 ? ' jogos ' : ' jogo '}` +
             'no carrinho.'}
-        </Quantity>
-        <Prices>
+        </S.Quantity>
+        <S.Prices>
           Total de {priceFormat(getTotalPrice())}{' '}
           <span>Em até 6x sem juros</span>
-        </Prices>
+        </S.Prices>
         <Button type="button" title="Clique aqui para continuar com a compra">
           comprar
         </Button>
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

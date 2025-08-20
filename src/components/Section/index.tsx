@@ -1,4 +1,4 @@
-import { SectionContainer, SectionTitle } from './styles'
+import * as S from './styles'
 
 export type SectionProps = {
   title: string
@@ -8,11 +8,11 @@ export type SectionProps = {
 
 export const Section = ({ title, background, children }: SectionProps) => {
   return (
-    <SectionContainer background={background}>
+    <S.SectionContainer background={background}>
       <div className="container">
-        <SectionTitle>{title}</SectionTitle>
+        <S.SectionTitle>{title}</S.SectionTitle>
         {children}
       </div>
-    </SectionContainer>
+    </S.SectionContainer>
   )
 }

@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { GalleryItem } from '../../pages/Home'
 
 import { Section } from '../Section'
-import { ItemsList, Item, Action, Modal, ModalContent } from './styles'
+import * as S from './styles'
 
-import close from '../../assets/icons/close.png'
+import closeIcon from '../../assets/icons/close.png'
 import playIcon from '../../assets/icons/play.png'
 import zoomIcon from '../../assets/icons/zoom.png'
 
@@ -47,9 +47,9 @@ export const Gallery = ({ defaultCover, name, items }: GalleryProps) => {
   return (
     <>
       <Section title="Galeria" background="black">
-        <ItemsList>
+        <S.ItemsList>
           {items.map((media, index) => (
-            <Item
+            <S.Item
               key={media.url}
               onClick={() => {
                 setModal({
@@ -63,27 +63,27 @@ export const Gallery = ({ defaultCover, name, items }: GalleryProps) => {
                 src={getMediaCover(media)}
                 alt={`Mídia ${index + 1} de ${name}`}
               />
-              <Action>
+              <S.Action>
                 <img src={getMediaIcon(media)} alt="Maximizar a mídia" />
-              </Action>
-            </Item>
+              </S.Action>
+            </S.Item>
           ))}
-        </ItemsList>
+        </S.ItemsList>
       </Section>
-      <Modal className={modal.isVisible === true ? 'visible' : ''}>
-        <ModalContent className="container">
+      <S.Modal className={modal.isVisible === true ? 'visible' : ''}>
+        <S.ModalContent className="container">
           <header>
             <h4>{name}</h4>
-            <img src={close} alt="Fechar" onClick={() => closeModal()} />
+            <img src={closeIcon} alt="Fechar" onClick={closeModal} />
           </header>
           {modal.type === 'image' ? (
             <img src={modal.url} />
           ) : (
             <iframe frameBorder={0} src={modal.url} />
           )}
-        </ModalContent>
+        </S.ModalContent>
         <div className="overlay" onClick={() => closeModal()}></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

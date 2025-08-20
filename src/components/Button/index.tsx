@@ -1,4 +1,4 @@
-import { ButtonContainer, ButtonLink } from './style'
+import * as S from './style'
 
 export type ButtonProps = {
   type: 'button' | 'link'
@@ -19,20 +19,20 @@ export const Button = ({
 }: ButtonProps) => {
   if (type === 'button') {
     return (
-      <ButtonContainer
+      <S.ButtonContainer
         type="button"
         title={title}
         variant={variant}
         onClick={onClick}
       >
         {children}
-      </ButtonContainer>
+      </S.ButtonContainer>
     )
   }
   return (
     //? adicionado Casting porque o link não suporta tipos indefinidos
-    <ButtonLink to={to as string} title={title}>
+    <S.ButtonLink to={to as string} title={title}>
       {children}
-    </ButtonLink>
+    </S.ButtonLink>
   )
 }

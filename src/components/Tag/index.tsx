@@ -1,4 +1,4 @@
-import { TagContainer } from './style'
+import * as S from './style'
 
 export type TagProps = {
   size?: 'small' | 'big'
@@ -6,5 +6,5 @@ export type TagProps = {
 }
 
 export const Tag = ({ children, size }: TagProps) => (
-  <TagContainer size={size}>{children}</TagContainer>
+  <S.TagContainer size={size}>{children}</S.TagContainer>
 )

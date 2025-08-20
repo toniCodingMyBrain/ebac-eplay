@@ -1,6 +1,6 @@
 import { Game } from '../../pages/Home'
 import { Product } from '../Product'
-import { List, ProductContainer, TitleSection } from './style'
+import * as S from './style'
 
 export type ProductListProps = {
   title: string
@@ -42,10 +42,10 @@ export const ProductList = ({
   }
 
   return (
-    <ProductContainer id={id} background={background}>
+    <S.ProductContainer id={id} background={background}>
       <div className="container">
-        <TitleSection>{title}</TitleSection>
-        <List>
+        <S.TitleSection>{title}</S.TitleSection>
+        <S.List>
           {gameList.map((game) => (
             <Product
               key={game.id}
@@ -58,8 +58,8 @@ export const ProductList = ({
               system={game.details.system}
             />
           ))}
-        </List>
+        </S.List>
       </div>
-    </ProductContainer>
+    </S.ProductContainer>
   )
 }

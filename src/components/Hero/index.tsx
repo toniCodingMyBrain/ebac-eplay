@@ -1,4 +1,4 @@
-import { ProductBanner, Infos } from './styles'
+import * as S from './styles'
 
 import { Tag } from '../Tag'
 import { Button } from '../Button'
@@ -20,13 +20,13 @@ export const Hero = ({ game }: HeroProps) => {
   }
 
   return (
-    <ProductBanner style={{ backgroundImage: `url(${game.media.cover})` }}>
+    <S.ProductBanner style={{ backgroundImage: `url(${game.media.cover})` }}>
       <div className="container">
         <div>
           <Tag>{game.details.category}</Tag>
           <Tag>{game.details.system}</Tag>
         </div>
-        <Infos>
+        <S.Infos>
           <h2>{game.name}</h2>
           <p>
             {game.prices.discount && (
@@ -46,8 +46,8 @@ export const Hero = ({ game }: HeroProps) => {
               Adicionar ao carrinho
             </Button>
           )}
-        </Infos>
+        </S.Infos>
       </div>
-    </ProductBanner>
+    </S.ProductBanner>
   )
 }
