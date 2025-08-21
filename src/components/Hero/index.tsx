@@ -3,9 +3,9 @@ import * as S from './styles'
 import { Tag } from '../Tag'
 import { Button } from '../Button'
 import { Game } from '../../pages/Home'
-import { priceFormat } from '../ProductList'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
+import { priceFormat } from '../../utils'
 
 type HeroProps = {
   game: Game

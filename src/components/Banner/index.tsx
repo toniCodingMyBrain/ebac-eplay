@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as S from './styles'
-import { priceFormat } from '../ProductList'
 
 import { Tag } from '../Tag'
 import { Button } from '../Button'
 import { useGetFeaturedGamesQuery } from '../../services/api'
+import { priceFormat } from '../../utils'
 
 export const Banner = () => {
   const { data: game } = useGetFeaturedGamesQuery()
