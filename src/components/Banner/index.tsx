@@ -1,16 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as S from './styles'
 
-import { Tag } from '../Tag'
-import { Button } from '../Button'
 import { useGetFeaturedGamesQuery } from '../../services/api'
 import { priceFormat } from '../../utils'
+
+import { Loader } from '../Loader'
+import { Tag } from '../Tag'
+import { Button } from '../Button'
 
 export const Banner = () => {
   const { data: game } = useGetFeaturedGamesQuery()
 
   if (!game) {
-    return <strong>Carregando...</strong>
+    return <Loader />
   }
 
   return (

@@ -46,7 +46,7 @@ export const Modal = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 95%;
+  height: 100%;
   z-index: 1;
   display: none;
   align-items: center;
@@ -70,7 +70,6 @@ export const ModalContent = styled.div`
   max-width: 960px;
   position: relative;
   z-index: 1;
-  max-height: 90vh;
 
   header {
     display: flex;
@@ -81,16 +80,23 @@ export const ModalContent = styled.div`
       font-size: 18px;
       font-weight: bold;
     }
+
+    img {
+      height: 16px;
+      width: 16px;
+      cursor: pointer;
+    }
   }
 
   img {
     display: flex;
-    max-width: 100%;
+    width: 100%;
+    height: 80vh;
   }
 
   iframe {
     display: flex;
     width: 100%;
-    height: 90vh;
+    height: 80vh;
   }
 `

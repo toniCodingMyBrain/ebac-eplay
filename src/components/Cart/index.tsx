@@ -57,7 +57,6 @@ const Cart = () => {
         </S.Prices>
         <Button
           type="button"
-          variant="primary"
           title="Clique aqui para continuar com a compra"
           onClick={linkToCheckout}
         >

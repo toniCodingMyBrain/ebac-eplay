@@ -9,7 +9,7 @@ import { Card } from '../Product/style'
  * * <Omit<Argumento, Propriedade_omitida>>
  */
 export const ProductContainer = styled.section<
-  Omit<ProductListProps, 'title' | 'gameList'>
+  Omit<ProductListProps, 'title' | 'gameList' | 'isLoading'>
 >`
   padding: 32px 0;
 

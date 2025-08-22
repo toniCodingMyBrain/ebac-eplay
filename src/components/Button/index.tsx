@@ -15,7 +15,7 @@ export const Button = ({
   to,
   onClick,
   children,
-  variant
+  variant = 'primary'
 }: ButtonProps) => {
   if (type === 'button' || type === 'submit') {
     return (

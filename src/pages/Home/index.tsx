@@ -33,40 +33,26 @@ export type Game = {
 }
 
 export const Home = () => {
-  const { data: onSaleGames } = useGetOnSaleQuery()
-  const { data: soonGames } = useGetSoonQuery()
+  const { data: onSaleGames, isLoading: isLoadingOnSale } = useGetOnSaleQuery()
+  const { data: soonGames, isLoading: isLoadingSoon } = useGetSoonQuery()
 
-  /* const [promotions, setPromotions] = useState<Game[]>([])
-  const [soon, setSoon] = useState<Game[]>([])
-
-   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/eplay/promocoes')
-      .then((res) => res.json())
-      .then((res) => setPromotions(res))
-
-    fetch('https://fake-api-tau.vercel.app/api/eplay/em-breve')
-      .then((res) => res.json())
-      .then((res) => setSoon(res))
-  }, []) */
-
-  if (onSaleGames && soonGames) {
-    return (
-      <>
-        <Banner />
-        <ProductList
-          gameList={onSaleGames}
-          id="on-sale"
-          title="Promoções"
-          background="gray"
-        />
-        <ProductList
-          gameList={soonGames}
-          id="coming-soon"
-          title="Em Breve"
-          background="black"
-        />
-      </>
-    )
-  }
-  return <h4>Carregando...</h4>
+  return (
+    <>
+      <Banner />
+      <ProductList
+        gameList={onSaleGames}
+        id="on-sale"
+        title="Promoções"
+        background="gray"
+        isLoading={isLoadingOnSale}
+      />
+      <ProductList
+        gameList={soonGames}
+        id="coming-soon"
+        title="Em Breve"
+        background="black"
+        isLoading={isLoadingSoon}
+      />
+    </>
+  )
 }

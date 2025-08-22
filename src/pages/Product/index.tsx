@@ -4,6 +4,11 @@ import { Section } from '../../components/Section'
 import { Gallery } from '../../components/Gallery'
 
 import { useGetGameQuery } from '../../services/api'
+import { Loader } from '../../components/Loader'
+
+type GameParams = {
+  id: string
+}
 
 export const Product = () => {
   /*
@@ -12,11 +17,11 @@ export const Product = () => {
    * console.log(teste)
    */
 
-  const { id } = useParams()
+  const { id } = useParams() as GameParams
 
-  const { data: game } = useGetGameQuery(id!)
+  const { data: game } = useGetGameQuery(id)
 
-  if (!game) return <h4>Carregando...</h4>
+  if (!game) return <Loader />
 
   return (
     <>
